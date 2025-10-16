@@ -17,11 +17,11 @@ function Square({ value, onSquareClick }) {
 }
 
 function GameStatusBox({ winner, turn }) {
-  return (
-    <div>
-      Current Player: {turn}
-    </div>
-  )
+  if (winner) {
+    return <div>Winner: {winner}</div>
+  } else {
+    return <div>Current Player: {turn}</div>
+  }
 }
 
 export default function Game() {
@@ -102,7 +102,10 @@ export default function Game() {
   }
 
   return (
-    <Board turn={turn} gameState={currentGameState} winner={winner} onPlay={playTurn} />
+    <>
+      <GameStatusBox winner={winner} turn={turn} />
+      <Board turn={turn} gameState={currentGameState} winner={winner} onPlay={playTurn} />
+    </>
   );
 }
 
